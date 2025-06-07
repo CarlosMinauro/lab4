@@ -1,6 +1,6 @@
-# Financial Management System
+## Sistema de Gestión Financiera
 
-A comprehensive web application for managing personal finances, built with React and Node.js.
+Una aplicación web integral para gestionar finanzas personales, desarrollada con React y Node.js.
 
 ## Escenarios de Historia de Usuario: Añadir Tarjeta
 
