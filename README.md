@@ -1,88 +1,149 @@
-# Laboratorio 04: Pruebas Unitarias con Jest en React
+# Financial Management System
 
-Este laboratorio tiene como objetivo proporcionar una introducción práctica a las pruebas unitarias en aplicaciones React utilizando Jest y React Testing Library.
+A comprehensive web application for managing personal finances, built with React and Node.js.
 
-## Aplicación Todo List
+## Escenarios de Historia de Usuario: Añadir Tarjeta
 
-La aplicación desarrollada es una lista de tareas (Todo List) con las siguientes funcionalidades:
+Basado en la implementación en `new-front/src/pages/AddCard.tsx` y `new-back/src/routes/credit-card.routes.ts`, los escenarios de prueba para la historia de usuario "Añadir Nueva Tarjeta" son los siguientes:
 
-- Añadir nuevas tareas
-- Marcar tareas como completadas
-- Eliminar tareas
-- Filtrar tareas por estado (todas, activas, completadas)
-- Ver estadísticas de tareas
-- Borrar todas las tareas completadas
+### Caminos Felices (Happy Paths):
 
-## Estructura del Proyecto
+- **Adición Exitosa con Todos los Campos Requeridos**: El usuario ingresa un número de tarjeta, nombre del titular y fecha de vencimiento válidos (y opcionalmente, marca y banco). La tarjeta se añade exitosamente, el formulario se limpia y el usuario es redirigido a la página de selección de tarjetas.
 
+### Caminos Infelices (Unhappy Paths):
+
+- **Campos Requeridos Vacíos**: El usuario intenta añadir una tarjeta dejando los campos `card_number`, `card_holder_name` o `expiry_date` vacíos. La aplicación debe mostrar un mensaje de error y la tarjeta no debe ser añadida.
+- **Error del Servidor**: El servidor devuelve un error durante el proceso de adición de la tarjeta (por ejemplo, debido a un problema de conexión o una validación más compleja en el backend). La aplicación debe mostrar un mensaje de error apropiado al usuario.
+
+Recomendación: Para más detalles sobre cómo escribir pruebas robustas, consulta la [Documentación de Jest](https://jestjs.io/docs/getting-started).
+
+## Características
+
+- Autenticación de usuario (inicio de sesión/registro)
+- Seguimiento de gastos
+- Gestión de presupuestos
+- Informes y análisis financieros
+- Panel de control con visualizaciones
+
+## Pila Tecnológica
+
+### Frontend
+- React with TypeScript
+- Material-UI for components
+- Redux Toolkit for state management
+- React Router for navigation
+- Formik & Yup for form handling
+- Chart.js for visualizations
+
+### Backend
+- Node.js with Express
+- TypeScript
+- PostgreSQL with Sequelize ORM
+- JWT for authentication
+- SOLID principles and design patterns
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- PostgreSQL (v12 or higher)
+- npm or yarn
+
+## Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd <repository-name>
 ```
-app/
-├── components/
-│   ├── Todo.tsx               # Componente principal que integra todos los demás
-│   ├── TodoForm.tsx           # Formulario para añadir nuevas tareas
-│   ├── TodoItem.tsx           # Componente individual para cada tarea
-│   ├── TodoList.tsx           # Lista de tareas
-│   ├── TodoFilter.tsx         # Filtros para las tareas
-│   ├── TodoStats.tsx          # Estadísticas de tareas
-│   └── __tests__/             # Directorio de pruebas
-│       ├── TodoItem.test.tsx  # Pruebas para TodoItem
-│       ├── TodoForm.test.tsx  # Pruebas para TodoForm
-│       └── TodoList.test.tsx  # Pruebas para TodoList
-├── page.tsx                   # Página principal
-└── layout.tsx                 # Layout de la aplicación
+
+2. Set up the database:
+- Create a PostgreSQL database named `software_db`
+- Update the database credentials in `new-back/.env`
+
+3. Install backend dependencies:
+```bash
+cd new-back
+npm install
 ```
 
-## Instrucciones del Laboratorio
+4. Install frontend dependencies:
+```bash
+cd ../new-front
+npm install
+```
 
-En este laboratorio, exploraremos cómo escribir pruebas unitarias efectivas siguiendo el patrón **Prepare, Execute and Validate**:
+## Running the Application
 
-1. **Prepare**: Configurar el entorno de prueba y los datos necesarios
-2. **Execute**: Realizar la acción que queremos probar
-3. **Validate**: Verificar que el resultado es el esperado
+1. Start the backend server:
+```bash
+cd new-back
+npm run dev
+```
 
-### Ejercicios
+2. Start the frontend development server:
+```bash
+cd new-front
+npm start
+```
 
-#### Ejercicio 1: Completar prueba de TodoItem
+The application will be available at:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:3001
 
-Completa el test para verificar que el componente `TodoItem` muestra correctamente el texto de una tarea con caracteres especiales.
+## Project Structure
 
-Archivo: `app/components/__tests__/TodoItem.test.tsx`
+### Backend (`new-back/`)
+```
+src/
+  ├── config/         # Configuration files
+  ├── controllers/    # Route controllers
+  ├── models/         # Database models
+  ├── repositories/   # Data access layer
+  ├── services/       # Business logic
+  ├── middlewares/    # Custom middlewares
+  ├── routes/         # API routes
+  ├── utils/          # Utility functions
+  ├── interfaces/     # TypeScript interfaces
+  └── types/          # TypeScript types
+```
 
-#### Ejercicio 2: Completar prueba de TodoForm
+### Frontend (`new-front/`)
+```
+src/
+  ├── components/     # Reusable components
+  ├── pages/         # Page components
+  ├── services/      # API services
+  ├── store/         # Redux store
+  ├── utils/         # Utility functions
+  ├── hooks/         # Custom hooks
+  ├── types/         # TypeScript types
+  └── assets/        # Static assets
+```
 
-Completa el test para verificar que el componente `TodoForm` maneja correctamente la entrada de texto con espacios al inicio o final.
+## Development
 
-Archivo: `app/components/__tests__/TodoForm.test.tsx`
+- Backend API documentation is available at http://localhost:3001/api-docs
+- Frontend development server includes hot reloading
+- TypeScript compilation is handled automatically
 
-#### Ejercicio 3: Completar prueba de TodoList
-
-Completa el test para verificar que el componente `TodoList` pasa correctamente las funciones onToggle y onDelete a cada TodoItem.
-
-Archivo: `app/components/__tests__/TodoList.test.tsx`
-
-## Casos de Prueba
-
-En las pruebas existentes, podrás encontrar ejemplos de:
-
-- **Happy Path**: Pruebas que verifican el comportamiento correcto cuando todo funciona como se espera
-- **Unhappy Path**: Pruebas que verifican el comportamiento cuando hay situaciones inesperadas o errores
-
-## Ejecución de Pruebas
-
-Para ejecutar las pruebas, utiliza el siguiente comando:
+## Testing
 
 ```bash
+# Backend tests
+cd new-back
+npm test
+
+# Frontend tests
+cd new-front
 npm test
 ```
 
-Para ejecutar las pruebas en modo observador (útil durante el desarrollo):
+## Contributing
 
-```bash
-npm run test:watch
-```
+1. Create a new branch for your feature
+2. Make your changes
+3. Submit a pull request
 
-## Recursos Adicionales
+## License
 
-- [Jest Documentation](https://jestjs.io/docs/getting-started)
-- [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
-- [Jest DOM Testing Library](https://github.com/testing-library/jest-dom)
+This project is licensed under the MIT License. 
