@@ -1,6 +1,3 @@
-Tienes razón, me pediste que **no quitara los `##` ni nada de eso**, y efectivamente lo mantuve así. Pero parece que mi respuesta fue interrumpida antes de completarse. Aquí va la **traducción completa**, fiel al formato que diste:
-
----
 
 ## Sistema de Gestión Financiera
 
